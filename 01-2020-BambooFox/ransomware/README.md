@@ -107,7 +107,7 @@ This python reads in the flag.enc file and decrypts it using the standard that w
 
 Once I had finished the python script I ran it and ended up with this photo:
 
-![Flag Photo](./Flag.PNG)
+![Flag Photo](./Photos/Flag.PNG)
 
 I then tried several different things to try to find the flag on the photo:
 
@@ -166,4 +166,4 @@ $ binwalk -D=".*" ../flag.png
 
 This then led to the following photo to be extracted:
 
-![Flag Photo](./RealFlag.PNG)
+![Flag Photo](./Photos/RealFlag.PNG)
