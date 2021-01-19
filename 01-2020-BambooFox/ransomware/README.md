@@ -1,5 +1,11 @@
 # Bamboo Fox Ransomware Write Up
 
+## Details:
+Points: 500
+Jeopardy style CTF
+
+## Write up:
+
 This challenge had no description whatsoever, just a Zip file. When first unzipping the downloaded file I ended up with two files, flag.enc and task.pyc. 
 
 Running task.pyc with python 2+ did not work, python3 worked but had an error. From this I concluded that the file was a python3 file and used uncompyle6 and got the code below.
