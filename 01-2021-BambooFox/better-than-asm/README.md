@@ -2,7 +2,10 @@
 
 ## Details:
 Points: 500
+
 Jeopardy style CTF
+
+Category: Reversing
 
 ## Write up:
 

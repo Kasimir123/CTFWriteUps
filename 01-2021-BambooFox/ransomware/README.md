@@ -2,7 +2,10 @@
 
 ## Details:
 Points: 500
+
 Jeopardy style CTF
+
+Category: Reversing
 
 ## Write up:
 
@@ -150,7 +153,7 @@ $ strings flag.png | grep -e 'flag'
 
 ```
 
-exiftool did not show any commentsor unusual data, and there were no strings in the png that contained flag. I then attempted to do a binwalk hoping for a hidden file inside the png.
+exiftool did not show any comments or unusual data, and there were no strings in the png that contained flag. I then attempted to do a binwalk hoping for a hidden file inside the png.
 
 ``` bash
 $ binwalk ./flag.png 
