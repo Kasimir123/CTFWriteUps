@@ -11,7 +11,7 @@ Category: Cryptography
 
 The challenge presented me with the following:
 
-![chall](./Original-Files/runes.png)
+![chall](./Original-Files/runes.PNG)
 
 Based on the title of the challenge I googled viking runes and found the following:
 

@@ -11,7 +11,7 @@ Category: Cryptography
 
 This challenge presented the following image:
 
-![chall](./Original-Files/rm.png)
+![chall](./Original-Files/rm.PNG)
 
 A reverse image search of the photo revealed that the map belonged to the show gravity falls. From here I went to a decoder for the gravity falls bill cipher.
 
