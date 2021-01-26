@@ -73,7 +73,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 
 For this challenge I set up the debugger and set a breakpoint on the line where it asks for the password. Since s2 was the input I wanted to look at what s1 one so that I could just type the password.
 
-![key](./Photos/key.png)
+![key](./Photos/key.PNG)
 
 I then typed in hackers_access and the program spit out the flag.
 
