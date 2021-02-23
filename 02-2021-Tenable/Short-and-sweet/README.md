@@ -1,7 +1,7 @@
 # Tenable short and sweet Write Up
 
 ## Details:
-Points: 200
+Points: 25
 
 Jeopardy style CTF
 
