@@ -1,4 +1,4 @@
-# Zer0pts Infected Write Up
+# Zer0pts Syscall 777 Write Up
 
 ## Details:
 
@@ -349,7 +349,235 @@ ld M[8]
 true
 ```
 
-We then went through and commented the assembly to figure out what each component did, after a bit we found out that:
+We then went through and commented the assembly to figure out what each component did:
+
+```
+ld [0]				
+jneq #777,200	; Syscall # != 777 -> exit
+
+ld [16]				
+and #255		
+jge #128,199	; if char 1 > 128 exit
+ld [16]				
+rsh #8				
+and #255			
+jge #128,195	; if char 2 > 128 exit
+ld [16]		
+rsh #16
+and #255
+jge #128,191  ; if char 3 > 128 exit
+ld [16]				
+rsh #24
+and #255
+jge #128,187  ; if char 4 > 128 exit
+
+ld [16]				; A = arg[0]
+st M[0]				; M[0] = arg[0]
+
+ld [24]  			
+ldx M[0]			
+xor x				
+st M[1]				; M[1] = M[0] xor arg[1]
+
+ld [32]				
+ldx M[1]			
+xor x				
+st M[2]				; M[2] = arg[2] xor M[1]
+
+ld [40]				
+ldx M[2]			
+xor x				
+st M[3]				; M[3] = arg[3] xor M[2]
+
+ld M[0]				
+ldx M[1]			
+add x				
+ldx M[2]			
+add x				
+ldx M[3]			
+add x				
+st M[4]				; M[4] = M[0] + M[1] + M[2] + M[3]
+
+ld M[0]				
+ldx M[1]			
+sub x				
+ldx M[2]			
+add x				
+ldx M[3]			
+sub x				
+st M[5]				; M[5] = M[0] - M[1] + M[2] - M[3]
+
+ld M[0]				
+ldx M[1]			
+add x				
+ldx M[2]			
+sub x				
+ldx M[3]			
+sub x				
+st M[6]				; M[6] = M[0] + M[1] - M[2] - M[3]
+
+ld M[0]				
+ldx M[1]
+sub x
+ldx M[2]
+sub x
+ldx M[3]
+add x
+st M[7]				; M[7] = M[0] - M[1] - M[2] + M[3]
+
+ld M[4]				
+ldx M[5]			
+or x			
+st M[8]				
+ld M[6]
+ldx M[7]
+and x				
+ldx M[8]			
+xor x				
+st M[8]				; M[8] = (M[4] OR M[5]) XOR (M[6] AND M[7])
+
+ld M[5]
+ldx M[6]
+or x
+st M[9]
+ld M[7]
+ldx M[4]
+and x
+ldx M[9]
+xor x
+st M[9]				; M[9] = (M[5] OR M[6]) XOR (M[7] AND M[4])
+
+ld M[6]
+ldx M[7]
+or x
+st M[10]
+ld M[4]
+ldx M[5]
+and x
+ldx M[10]
+xor x
+st M[10]			; M[10] = (M[6] OR M[7]) XOR (M[4] AND M[5])
+
+ld M[7]
+ldx M[4]
+or x
+st M[11]
+ld M[5]
+ldx M[6]
+and x
+ldx M[11]
+xor x
+st M[11]			; M[11] = (M[7] OR M[4]) XOR (M[5] AND M[6])
+
+ld M[8]              ; Check M[8]
+jeq #4127179254,37
+jeq #1933881070,20
+jeq #4255576062,31
+jeq #1670347938,10
+jeq #2720551936,15
+jeq #2307981054,26
+jeq #2673307092,29
+jeq #4139379682,10
+jeq #4192373742,15
+jeq #530288564,20
+jeq #4025255646,29
+jeq #3747612986,14
+jeq #3098492862,3
+jeq #2130820044,14
+
+ld M[9]               ; Check M[9]
+jeq #4056898606,50,84
+ld M[9]
+jeq #3064954302,32,82
+ld M[9]
+jeq #3602496994,24,80
+ld M[9]
+jeq #1627051272,34,78
+ld M[9]
+jeq #2002783966,34,76
+ld M[9]
+jeq #4088827598,28,74
+ld M[9]
+jeq #1340672294,36,72
+ld M[9]
+jeq #2115580844,12,70
+ld M[9]
+jeq #530288564,36,68
+ld M[9]
+jeq #3415533530,28,66
+ld M[9]
+jeq #3116543486,10,64
+ld M[9]
+jeq #251771212,14,62
+ld M[9]
+jeq #4126139894,20,60
+ld M[9]
+jeq #2813168974,6,58
+
+ld M[10]                ; Check M[10]
+jeq #2130523044,46,56
+ld M[10]
+jeq #3606265306,36,54
+ld M[10]
+jeq #3151668710,38,52
+ld M[10]
+jeq #614968622,34,50
+ld M[10]
+jeq #3086875838,42,48
+ld M[10]
+jeq #251771212,16,46
+ld M[10]
+jeq #3015552726,18,44
+ld M[10]
+jeq #1627379644,34,42
+ld M[10]
+jeq #1601724370,12,40
+ld M[10]
+jeq #665780030,18,38
+ld M[10]
+jeq #3281895882,14,36
+ld M[10]
+jeq #1301225350,30,34
+ld M[10]
+jeq #2583645294,20,32
+ld M[10]
+jeq #3917315412,6,30
+
+ld M[11]                ; Check M[11]
+jeq #2673307092,27,28
+ld M[11]
+jeq #1532821474,25,26
+ld M[11]
+jeq #3119098870,23,24
+ld M[11]
+jeq #3917315412,21,22
+ld M[11]
+jeq #2174343406,19,20
+ld M[11]
+jeq #666819390,17,18
+ld M[11]
+jeq #4143147994,15,16
+ld M[11]
+jeq #1827055294,13,14
+ld M[11]
+jeq #4290701286,11,12
+ld M[11]
+jeq #197094626,9,10
+ld M[11]
+jeq #2145762244,7,8
+ld M[11]
+jeq #2720880308,5,6
+ld M[11]
+jeq #3120414398,3,4
+ld M[11]
+jeq #3708166042,1,2
+
+ret #2147418112         ; Syscall# != 777
+ret #327680             ; Success
+ret #327681             ; Error
+```
+
+after a bit we found out that:
 
 ```
 M[0] = arg[0]
@@ -528,3 +756,5 @@ After assembling this we got that the flag was:
 ```
 zer0pts{B3rk3l3y_P4ck3t_F1lt3r:Y3t_4n0th3r_4ss3mbly}
 ```
+
+Lots of thanks to NodeDigital for working with me on the go file and commenting of the assembly.
