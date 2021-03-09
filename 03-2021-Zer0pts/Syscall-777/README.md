@@ -628,22 +628,18 @@ s = Solver()
 args = [BitVec(f'args[{i}]', 32) for i in range(0,14)]
 
 # Add char constraints
-for i in range(2, len(args)):
+for i in range(0, len(args)):
       
   # last character
-  s.add(((args[i]) & 0xff) >= 32)
   s.add(((args[i]) & 0xff) <= 126)
 
   # second to last character
-  s.add(((args[i] >> 8) & 0xff) >= 32)
   s.add(((args[i] >> 8) & 0xff) <= 126)
 
   # third from last character
-  s.add(((args[i] >> 16) & 0xff) >= 32)
   s.add(((args[i] >> 16) & 0xff) <= 126)
 
   # fourth from last character
-  s.add(((args[i] >> 24) & 0xff) >= 32)
   s.add(((args[i] >> 24) & 0xff) <= 126)
 
 # add constraints
@@ -663,29 +659,8 @@ def solve(j):
   s.add(M[10] == (M[6] | M[7]) ^ (M[4] & M[5]))
   s.add(M[11] == (M[7] | M[4]) ^ (M[5] & M[6]))
 
-  # adds row checks for each M
-  for i in range(0, 14):
-      addConstraints(i, M)
-      
-# swaps characters around
-def swap32(x):
-    return (((x << 24) & 0xFF000000) |
-            ((x <<  8) & 0x00FF0000) |
-            ((x >>  8) & 0x0000FF00) |
-            ((x >> 24) & 0x000000FF))
-
-# prints the solution as ascii
-def printAsAscii(num):
-  num = swap32(num)
-  hexStr = '{:08x}'.format(num)
-  bytes_object = bytes.fromhex(hexStr)
-  ascii_string = bytes_object.decode("ASCII")
-  print(ascii_string)
-  
-# adds row checks
-def addConstraints(i, M):
-      
-    s.add(Or(
+  # adds row checks
+  s.add(Or(
     And(M[8] == 4127179254, M[9] == 4126139894, M[10] == 3086875838, M[11] == 3120414398), 
     And(M[8] == 1933881070, M[9] == 2002783966, M[10] == 1601724370, M[11] == 1532821474), 
     And(M[8] == 4255576062, M[9] == 3116543486, M[10] == 3151668710, M[11] == 4290701286), 
@@ -701,6 +676,21 @@ def addConstraints(i, M):
     And(M[8] == 3098492862, M[9] == 3064954302, M[10] == 3086875838, M[11] == 3120414398), 
     And(M[8] == 2130820044, M[9] == 2115580844, M[10] == 2130523044, M[11] == 2145762244)
     ))
+      
+# swaps characters around
+def swap32(x):
+    return (((x << 24) & 0xFF000000) |
+            ((x <<  8) & 0x00FF0000) |
+            ((x >>  8) & 0x0000FF00) |
+            ((x >> 24) & 0x000000FF))
+
+# prints the solution as ascii
+def printAsAscii(num):
+  num = swap32(num)
+  hexStr = '{:08x}'.format(num)
+  bytes_object = bytes.fromhex(hexStr)
+  ascii_string = bytes_object.decode("ASCII")
+  print(ascii_string)
 
 # calls solve function for each argument
 for i in range(0, len(args)-3):
@@ -711,7 +701,6 @@ print(s.check())
 print(s.assertions())
 m = s.model()
 
-# prints the arguments
 for d in m.decls():
     if "args" in d.name():
         print("%s = %s" % (d.name(), m[d]))
