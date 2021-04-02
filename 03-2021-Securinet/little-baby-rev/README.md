@@ -58,7 +58,7 @@ I found the following function which seemed to be the while loop that I wanted:
   }
 ```
 
-After reading in my strnig it compared it against the answer__2bKjAtEJJ5cp19bpmXcStjQ so I took a look at that memory while the program was running.
+After reading in my string it compared it against the answer__2bKjAtEJJ5cp19bpmXcStjQ so I took a look at that memory while the program was running.
 
 I saw that that contained:
 
