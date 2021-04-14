@@ -4,7 +4,7 @@
 
 Jeopardy style CTF
 
-Category: Reverse Engineering
+Category: Binary Exploitation
 
 Comments:
 
