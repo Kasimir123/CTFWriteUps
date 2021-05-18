@@ -38,7 +38,7 @@ int __fastcall buyCall(void* ecx, void* edx, unsigned int a2, unsigned int a3)
 	return itemBuyGateway(ecx, 3, 0);
 }
 
-void BitHeroes(HANDLE h, HMODULE hMod)
+void Pwntown(HANDLE h, HMODULE hMod)
 {
 	AllocConsole();
 	FILE* f;
