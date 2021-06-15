@@ -15,6 +15,7 @@ Some categories here will also not match what is on the challenge solution READM
 | Speeds and Feeds           | 2021 - picoCTF                  | Trivial           |
 | BF Means Best Friend Right?| 2021 - HackPack                 | Trivial           |
 | Tiny Interpreter           | 2021 - dCTF                     | Trivial           |
+| Little Mountain            | 2021 - Circle City Con          | Trivial           |
 | Thirsty Cow                | 2021 - ShadowCTF                | Easy              |
 | Vault                      | 2021 - ShadowCTF                | Easy              |
 | Little Baby Rev            | 2021 - Securinet                | Easy              |
@@ -27,6 +28,7 @@ Some categories here will also not match what is on the challenge solution READM
 | Painting Windows           | 2021 - UMDCTF                   | Easy              |
 | Starbucks                  | 2021 - UMDCTF                   | Easy              |
 | Just In Time               | 2021 - dCTF                     | Easy              |
+| Guardian                   | 2021 - Circle City Con          | Easy              |
 | Ransomware                 | 2021 - BambooFox                | Easy - Medium     |
 | Better Than ASM            | 2021 - BambooFox                | Easy - Medium     |
 | Ware                       | 2021 - Offshift                 | Easy - Medium     |
