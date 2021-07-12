@@ -16,6 +16,7 @@ Some categories here will also not match what is on the challenge solution READM
 | BF Means Best Friend Right?| 2021 - HackPack                 | Trivial           |
 | Tiny Interpreter           | 2021 - dCTF                     | Trivial           |
 | Little Mountain            | 2021 - Circle City Con          | Trivial           |
+| wstrings                   | 2021 - RedPwn                   | Trivial           |
 | Thirsty Cow                | 2021 - ShadowCTF                | Easy              |
 | Vault                      | 2021 - ShadowCTF                | Easy              |
 | Little Baby Rev            | 2021 - Securinet                | Easy              |
@@ -43,6 +44,7 @@ Some categories here will also not match what is on the challenge solution READM
 | WarGames                   | 2021 - FooBar                   | Easy - Medium     |
 | Function Pointer Fun       | 2021 - HackPack                 | Easy - Medium     |
 | Bell                       | 2021 - dCTF                     | Easy - Medium     |
+| bread making               | 2021 - RedPwn                   | Easy - Medium     |
 | Hash                       | 2021 - Offshift                 | Medium            |
 | X and Or                   | 2021 - Offshift                 | Medium            |
 | Hacker Manifesto           | 2021 - Tenable                  | Medium            |
@@ -55,6 +57,7 @@ Some categories here will also not match what is on the challenge solution READM
 | Alienware                  | 2021 - Cyber Apocalypse         | Medium            |
 | Exhell                     | 2021 - HackPack                 | Medium            |
 | FeistyCrypt                | 2021 - UMDCTF                   | Medium            |
+| dimensionality             | 2021 - RedPwn                   | Medium            |
 | Run!                       | 2021 - Securinet                | Medium - Difficult|
 | Infected                   | 2021 - Zer0pts                  | Medium - Difficult|
 | Syscall 777                | 2021 - Zer0pts                  | Difficult         |
