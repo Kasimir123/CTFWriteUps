@@ -30,6 +30,9 @@ Some categories here will also not match what is on the challenge solution READM
 | Starbucks                  | 2021 - UMDCTF                   | Easy              |
 | Just In Time               | 2021 - dCTF                     | Easy              |
 | Guardian                   | 2021 - Circle City Con          | Easy              |
+| Fewer Thoughts, Head Empty | 2021 - ImaginaryCTF             | Easy              |
+| Normal                     | 2021 - ImaginaryCTF             | Easy              |
+| Stings                     | 2021 - ImaginaryCTF             | Easy              |
 | Ransomware                 | 2021 - BambooFox                | Easy - Medium     |
 | Better Than ASM            | 2021 - BambooFox                | Easy - Medium     |
 | Ware                       | 2021 - Offshift                 | Easy - Medium     |
@@ -45,6 +48,7 @@ Some categories here will also not match what is on the challenge solution READM
 | Function Pointer Fun       | 2021 - HackPack                 | Easy - Medium     |
 | Bell                       | 2021 - dCTF                     | Easy - Medium     |
 | bread making               | 2021 - RedPwn                   | Easy - Medium     |
+| Jumprope                   | 2021 - ImaginaryCTF             | Easy - Medium     |
 | Hash                       | 2021 - Offshift                 | Medium            |
 | X and Or                   | 2021 - Offshift                 | Medium            |
 | Hacker Manifesto           | 2021 - Tenable                  | Medium            |
@@ -58,6 +62,7 @@ Some categories here will also not match what is on the challenge solution READM
 | Exhell                     | 2021 - HackPack                 | Medium            |
 | FeistyCrypt                | 2021 - UMDCTF                   | Medium            |
 | dimensionality             | 2021 - RedPwn                   | Medium            |
+| Roolang                    | 2021 - ImaginaryCTF             | Medium            |
 | Run!                       | 2021 - Securinet                | Medium - Difficult|
 | Infected                   | 2021 - Zer0pts                  | Medium - Difficult|
 | Syscall 777                | 2021 - Zer0pts                  | Difficult         |
@@ -131,3 +136,5 @@ Some categories here will also not match what is on the challenge solution READM
 | Tab, Tab, Attack           | 2021 - picoCTF                  | Trivial           |
 | Wave A Flag                | 2021 - picoCTF                  | Trivial           |
 | Broken qr                  | 2021 - Tenable                  | Easy              |
+| Formatting                 | 2021 - ImaginaryCTF             | Easy              |
+| Puzzle 2                   | 2021 - ImaginaryCTF             | Easy              |
