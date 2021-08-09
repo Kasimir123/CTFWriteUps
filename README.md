@@ -33,6 +33,8 @@ Some categories here will also not match what is on the challenge solution READM
 | Fewer Thoughts, Head Empty | 2021 - ImaginaryCTF             | Easy              |
 | Normal                     | 2021 - ImaginaryCTF             | Easy              |
 | Stings                     | 2021 - ImaginaryCTF             | Easy              |
+| Dotty                      | 2021 - RaRCTF                   | Easy              |
+| verybabyrev                | 2021 - RaRCTF                   | Easy              |
 | Ransomware                 | 2021 - BambooFox                | Easy - Medium     |
 | Better Than ASM            | 2021 - BambooFox                | Easy - Medium     |
 | Ware                       | 2021 - Offshift                 | Easy - Medium     |
@@ -49,6 +51,9 @@ Some categories here will also not match what is on the challenge solution READM
 | Bell                       | 2021 - dCTF                     | Easy - Medium     |
 | bread making               | 2021 - RedPwn                   | Easy - Medium     |
 | Jumprope                   | 2021 - ImaginaryCTF             | Easy - Medium     |
+| Infinite Free Trial        | 2021 - RaRCTF                   | Easy - Medium     |
+| RaRPG                      | 2021 - RaRCTF                   | Easy - Medium     |
+| Very TriVial Reversing     | 2021 - RaRCTF                   | Easy - Medium     |
 | Hash                       | 2021 - Offshift                 | Medium            |
 | X and Or                   | 2021 - Offshift                 | Medium            |
 | Hacker Manifesto           | 2021 - Tenable                  | Medium            |
