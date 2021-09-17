@@ -62,12 +62,12 @@ The key generation:
 What was printed at the end of the program:
 
 ```verilog
-  task set_key();
-    int tmp;
-    // key[0] = 0;
-    read_file_descriptor=$fopen("/dev/urandom","rb");
-    tmp = $fread(key, read_file_descriptor);
-    $readmemh("/dev/urandom",key);
+ task print_res();
+    integer i;
+    for( i=0; i<64; i = i + 1) begin
+      $write("%h ",ram[255-i]);
+    end
+    $write("\n");
   endtask
 ```
 
