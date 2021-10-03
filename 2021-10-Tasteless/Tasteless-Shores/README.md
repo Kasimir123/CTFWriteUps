@@ -223,7 +223,7 @@ I then modified the chat function in client2 with the following:
 func chat(whisper, msg):
 	player.transform.origin.x = msg.split(",")[0].to_float()
 	player.transform.origin.y = msg.split(",")[1].to_float()
-    player.transform.origin.z = msg.split(",")[2].to_float()
+	player.transform.origin.z = msg.split(",")[2].to_float()
 	socket.put_u8(MsgClientChat)
 	socket.put_u64(whisper)
 	socket.put_u8(msg.length())
