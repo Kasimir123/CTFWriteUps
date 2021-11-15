@@ -1732,10 +1732,239 @@ int b = check(a);
 print(b);
 ```
 
-From here we can see that we have a bunch of conditions which means that we can simply write a z3py script. Running the script you will find that there is a bit of ambiguity with 2 different characters (marked by ?):
+From here we can see that we have a bunch of conditions which means that we can simply write a z3py script.
 
-`flag{R3c?r50_?3c0mp_3z!_Gu3s5_u_sh0u1d_g37_g08d_71k3_m3}`
+pure constriants (no guessing):
 
-However, based on the challenge description you can see that they are either u/U or d/D for recurso and decompilation. Making the flag:
+```py
+from z3 import *
+
+maina = BitVec('maina', 64)
+
+checka = BitVec('checka', 64)
+
+keepgoinga = BitVec('keepgoinga', 64)
+keepgoingb = BitVec('keepgoingb', 64)
+
+checkthebigsa = BitVec('checkthebigsa', 40)
+checkthebigsb = BitVec('checkthebigsb', 40)
+
+nextNextNextChecka = BitVec('nextNextNextChecka', 64)
+nextNextNextCheckb = BitVec('nextNextNextCheckb', 64)
+nextNextNextCheckc = BitVec('nextNextNextCheckc', 64)
+nextNextNextCheckd = BitVec('nextNextNextCheckd', 64)
+nextNextNextChecke = BitVec('nextNextNextChecke', 64)
+
+finalChecka = BitVec('finalChecka', 64)
+finalCheckb = BitVec('finalCheckb', 64)
+finalCheckc = BitVec('finalCheckc', 64)
+finalCheckd = BitVec('finalCheckd', 64)
+finalChecke = BitVec('finalChecke', 64)
+finalCheckf = BitVec('finalCheckf', 64)
+finalCheckg = BitVec('finalCheckg', 64)
+finalCheckh = BitVec('finalCheckh', 64)
+
+vals = [maina, checka, keepgoinga, keepgoingb, checkthebigsa, checkthebigsb, nextNextNextChecka, nextNextNextCheckb,
+	nextNextNextCheckc, nextNextNextCheckd, nextNextNextChecke, finalChecka, finalCheckb, finalCheckc,
+	finalCheckd, finalChecke, finalCheckf, finalCheckg, finalCheckh]
+
+s = Solver()
+
+s.add(maina == 102)
+
+s.add(checka & 1337 == 1057)
+s.add(checka | 1337 == 28025)
+s.add(checka ^ 1337 < 269700)
+
+s.add(keepgoinga ^ keepgoingb == 28)
+s.add(keepgoinga & keepgoingb == 99)
+
+s.add(checkthebigsb - checkthebigsa == 489139534831)
+s.add(checkthebigsb & 4294967040 == 892362496)
+s.add(checkthebigsb < checkthebigsa)
+
+s.add(nextNextNextChecka - nextNextNextCheckb == -188178084847)
+s.add(nextNextNextChecka * nextNextNextChecke == 10593957610752)
+s.add((nextNextNextChecka - nextNextNextCheckb) + nextNextNextCheckc == 118730899270)
+s.add(nextNextNextChecka + nextNextNextCheckb + nextNextNextCheckc + nextNextNextCheckd == 1346493052268)
+s.add(nextNextNextCheckd | nextNextNextChecke == 409991082872)
+s.add(nextNextNextCheckd - nextNextNextCheckc == 103082098739)
+
+s.add(finalChecka == 30001)
+s.add(finalCheckb == 25695)
+s.add(finalCheckc == 26419)
+s.add(finalCheckd == 928999216)
+s.add(finalChecke == 62003745337707)
+s.add(finalCheckf == 13151)
+s.add(finalCheckg == 27955)
+s.add(finalCheckh == 125)
+
+
+s.check()
+m = s.model()
+
+print(m)
+total_str = ""
+for i in vals:
+	hex_str = hex(int(str(m[i])))[2:].replace("00", '')
+	cur_str = ""
+	for i in range(0, len(hex_str), 2):
+		try:
+			cur_str += bytes.fromhex(hex_str[i:i+2]).decode("ASCII")
+		except:
+			cur_str += "."
+        print(cur_str)
+	total_str += cur_str
+
+print(total_str)
+```
+
+Which gives you:
+
+```
+f
+la
+c
+
+`R3c%
+.50_
+3c0mp
+_3z!_
+Gu3s5
+_u_sh
+0
+u1
+d_
+g3
+7_g0
+8d_71k
+3_
+m3
+}
+flac`R3c%.50_3c0mp_3z!_Gu3s5_u_sh0u1d_g37_g08d_71k3_m3}
+```
+R3c..50 makes it fairly obvious that it is Recurso in some form. and that we don't need that initial value in front so it is 4 bytes.
+
+and you know it should be flag{ so you can add some more constraints:
+
+```py
+from z3 import *
+
+maina = BitVec('maina', 64)
+
+checka = BitVec('checka', 64)
+
+keepgoinga = BitVec('keepgoinga', 64)
+keepgoingb = BitVec('keepgoingb', 64)
+
+checkthebigsa = BitVec('checkthebigsa', 40)
+checkthebigsb = BitVec('checkthebigsb', 40)
+
+nextNextNextChecka = BitVec('nextNextNextChecka', 64)
+nextNextNextCheckb = BitVec('nextNextNextCheckb', 64)
+nextNextNextCheckc = BitVec('nextNextNextCheckc', 64)
+nextNextNextCheckd = BitVec('nextNextNextCheckd', 64)
+nextNextNextChecke = BitVec('nextNextNextChecke', 64)
+
+finalChecka = BitVec('finalChecka', 64)
+finalCheckb = BitVec('finalCheckb', 64)
+finalCheckc = BitVec('finalCheckc', 64)
+finalCheckd = BitVec('finalCheckd', 64)
+finalChecke = BitVec('finalChecke', 64)
+finalCheckf = BitVec('finalCheckf', 64)
+finalCheckg = BitVec('finalCheckg', 64)
+finalCheckh = BitVec('finalCheckh', 64)
+
+vals = [maina, checka, keepgoinga, keepgoingb, checkthebigsa, checkthebigsb, nextNextNextChecka, nextNextNextCheckb,
+	nextNextNextCheckc, nextNextNextCheckd, nextNextNextChecke, finalChecka, finalCheckb, finalCheckc,
+	finalCheckd, finalChecke, finalCheckf, finalCheckg, finalCheckh]
+
+s = Solver()
+
+s.add(maina == 102)
+
+s.add(checka & 1337 == 1057)
+s.add(checka | 1337 == 28025)
+s.add(checka ^ 1337 < 269700)
+
+s.add(keepgoinga ^ keepgoingb == 28)
+s.add(keepgoinga & keepgoingb == 99)
+s.add(keepgoinga == 0x67)
+s.add(keepgoingb == 0x7b)
+
+s.add(checkthebigsb - checkthebigsa == 489139534831)
+s.add(checkthebigsb & 4294967040 == 892362496)
+s.add(checkthebigsb < checkthebigsa)
+s.add((checkthebigsa & 0xFFFFFF00)  == 0x52336300)
+s.add(Or(checkthebigsa & 0xFF == ord('u'), checkthebigsa & 0xFF == ord('U')))
+
+s.add(nextNextNextChecka - nextNextNextCheckb == -188178084847)
+s.add(nextNextNextChecka * nextNextNextChecke == 10593957610752)
+s.add((nextNextNextChecka - nextNextNextCheckb) + nextNextNextCheckc == 118730899270)
+s.add(nextNextNextChecka + nextNextNextCheckb + nextNextNextCheckc + nextNextNextCheckd == 1346493052268)
+s.add(nextNextNextCheckd | nextNextNextChecke == 409991082872)
+s.add(nextNextNextCheckd - nextNextNextCheckc == 103082098739)
+
+s.add(finalChecka == 30001)
+s.add(finalCheckb == 25695)
+s.add(finalCheckc == 26419)
+s.add(finalCheckd == 928999216)
+s.add(finalChecke == 62003745337707)
+s.add(finalCheckf == 13151)
+s.add(finalCheckg == 27955)
+s.add(finalCheckh == 125)
+
+
+s.check()
+m = s.model()
+
+print(m)
+total_str = ""
+for i in vals:
+	hex_str = hex(int(str(m[i])))[2:].replace("00", '')
+	cur_str = ""
+	for i in range(0, len(hex_str), 2):
+		try:
+			cur_str += bytes.fromhex(hex_str[i:i+2]).decode("ASCII")
+		except:
+			cur_str += "."
+	print(cur_str)
+	total_str += cur_str
+
+print(total_str)
+```
+
+And with that you get:
+
+```
+f
+la
+g
+{
+~R3cU
+.50_D
+.3c0mp
+._3z!_
+Gu3s5
+_u_sh
+0
+u1
+d_
+g3
+7_g0
+8d_71k
+3_
+m3
+}
+flag{~R3cU.50_D.3c0mp._3z!_Gu3s5_u_sh0u1d_g37_g08d_71k3_m3}
+```
+
+You know you may have sizes slightly off but if you constrain to only allow sizes you know for sure you end up with:
+
+```
+flag{R3cU.50_.3c0mp._3z!_Gu3s5_u_sh0u1d_g37_g08d_71k3_m3}
+```
+
+However, based on the challenge description you can see that they are either r/R or d/D for recurso and decompilation. Making the flag:
 
 `flag{R3cUr50_D3c0mp_3z!_Gu3s5_u_sh0u1d_g37_g08d_71k3_m3}`
