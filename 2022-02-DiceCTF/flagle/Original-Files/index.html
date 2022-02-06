@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flagle</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+<div class="game-container">
+    <div class="guess" id="guess-1">
+        <input class="letter" data-guess="1" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="1" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="1" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="1" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="1" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="1" data-letter="6" maxlength="5" disabled>
+    </div>
+    <div class="guess" id="guess-2">
+        <input class="letter" data-guess="2" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="2" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="2" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="2" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="2" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="2" data-letter="6" maxlength="5" disabled>
+    </div>
+    <div class="guess" id="guess-3">
+        <input class="letter" data-guess="3" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="3" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="3" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="3" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="3" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="3" data-letter="6" maxlength="5" disabled>
+    </div>
+    <div class="guess" id="guess-4">
+        <input class="letter" data-guess="4" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="4" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="4" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="4" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="4" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="4" data-letter="6" maxlength="5" disabled>
+    </div>
+    <div class="guess" id="guess-5">
+        <input class="letter" data-guess="5" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="5" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="5" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="5" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="5" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="5" data-letter="6" maxlength="5" disabled>
+    </div>
+    <div class="guess" id="guess-6">
+        <input class="letter" data-guess="6" data-letter="1" maxlength="5" disabled>
+        <input class="letter" data-guess="6" data-letter="2" maxlength="5" disabled>
+        <input class="letter" data-guess="6" data-letter="3" maxlength="5" disabled>
+        <input class="letter" data-guess="6" data-letter="4" maxlength="5" disabled>
+        <input class="letter" data-guess="6" data-letter="5" maxlength="5" disabled>
+        <input class="letter" data-guess="6" data-letter="6" maxlength="5" disabled>
+    </div>
+
+    <button id="guess-button">GUESS</button>
+</div>
+
+<script src="flag-checker.js"></script>
+<script src="script.js"></script>
+<script>
+    const guess = Module.cwrap('guess', 'number', ['number', 'string']);
+    const CORRECT = 0;
+    const WRONG_LOCATION = 1;
+    const INCORRECT = 2;
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+,-./:;<=>?@[]^_{|}~";
+
+    const get_input = (guess_idx, letter_idx) => {
+        return document.querySelector(`[data-guess="${guess_idx}"][data-letter="${letter_idx}"]`)
+    };
+
+    const keydown_listener = (e) => {
+        const target = e.target;
+        const guess_idx = +target.dataset.guess;
+        const letter_idx = +target.dataset.letter;
+
+        if (e.modifiers?.length > 0) {
+            return;
+        }
+
+        if (e.key.length === 1 && !alphabet.includes(e.key)) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.key === "Backspace" && target.value.length === 0 && letter_idx > 1) {
+            get_input(guess_idx, letter_idx - 1).focus();
+        } else if (e.key === "Delete" && target.value.length === 0 && letter_idx < 6) {
+            const elem = get_input(guess_idx, letter_idx + 1);
+            elem.focus();
+            elem.setSelectionRange(0, 0);
+            e.preventDefault();
+            return false;
+        } else if (e.key.length === 1 && target.value.length === 5 && letter_idx < 6) {
+            get_input(guess_idx, letter_idx + 1).focus();
+        } else if (e.key === "Enter") {
+            submit_guess();
+        }
+    };
+
+    let current_guess = 1;
+    const guess_button = document.getElementById('guess-button');
+
+    const submit_guess = () => {
+        let correct = 0;
+        let input_text = '';
+        for (let i = 1; i <= 6; ++i) {
+            const el = get_input(current_guess, i);
+
+            const guess_val = el.value;
+            input_text += guess_val;
+
+            const result = guess(i, guess_val);
+            console.log(result, guess_val, i, guess_val);
+            if (result === CORRECT) {
+                el.classList.add('correct');
+                if (current_guess < 6) {
+                    const next = get_input(current_guess + 1, i);
+                    next.value = guess_val;
+                    next.classList.add('correct');
+                }
+                correct++;
+            } else if (result === WRONG_LOCATION) {
+                el.classList.add('partial');
+            } else if (result === INCORRECT) {
+                el.classList.add('incorrect');
+            }
+
+            el.disabled = true;
+            el.removeEventListener('keydown', keydown_listener);
+        }
+        current_guess++;
+
+        if (correct === 6) {
+            prompt('Congrats! Here\'s your flag:', input_text);
+        }
+
+        if (current_guess > 6) {
+            guess_button.disabled = true;
+        } else {
+            init_guess();
+        }
+    };
+    guess_button.onclick = submit_guess;
+
+    const init_guess = () => {
+        for (let i = 1; i <= 6; ++i) {
+            const el = get_input(current_guess, i);
+            if (!el.classList.contains('correct'))
+                el.disabled = false;
+            el.addEventListener('keydown', keydown_listener);
+        }
+    };
+    init_guess();
+</script>
+
+</body>
+
+</html>

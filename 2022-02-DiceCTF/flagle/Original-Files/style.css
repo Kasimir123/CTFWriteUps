@@ -1,0 +1,78 @@
+body, html {
+    background: #181818;
+}
+
+.header {
+    color: #ffffff;
+    font-weight: bolder;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 48px;
+    margin-bottom: 32px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0);
+}
+
+.flag {
+    color: #fad183;
+}
+
+.game-container {
+    width: calc(1340px);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.guess {
+    margin-bottom: 10px;
+}
+
+.letter {
+    margin-left: 5px;
+}
+
+.letter.correct {
+    border: 2px solid transparent;
+    background-color: #588158;
+}
+
+.letter.incorrect {
+    border: 2px solid transparent;
+    background-color: #5d5a5a;
+}
+
+.letter.partial {
+    border: 2px solid transparent;
+    background-color: #c2912a;
+}
+
+input {
+    background-color: transparent;
+    border: solid 2px #a4a4a4;
+    width: 170px;
+    height: 80px;
+    font-size: 48px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+input[disabled] {
+    background-color: #090909;
+    border: solid 2px #2c2c2c;
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    height: 32px;
+    background: orange;
+    border: none;
+    color: white;
+}
